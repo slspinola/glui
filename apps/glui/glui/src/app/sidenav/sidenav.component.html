@@ -1,0 +1,18 @@
+<mat-sidenav-container fxFlex>
+    <mat-sidenav class="sidenav-container"  *ngIf="showMenu" opened mode="side" >
+        <mat-list>
+          <img src="assets/logo/cmevora.jpg" alt="">
+          <mat-divider></mat-divider>
+        </mat-list>
+      <mat-nav-list *ngFor="let item of menuItems">
+        <a mat-list-item routerLink="{{item.routerLink}}" >
+          <mat-icon matListIcon>{{item.icon}}</mat-icon>
+          {{item.title}}
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

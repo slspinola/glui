@@ -1,0 +1,27 @@
+.sidenav-container {
+  width: 20%;
+  max-width: 250px;
+  mat-list {
+    
+    img {
+      margin: 10px 0 10px 10px;
+      width: 80%;
+    }
+  }
+  mat-nav-list {
+    :hover {
+      background-color: #8fc62a;
+    }
+    padding: 5px;
+    a {
+      font-weight: bold;
+    }
+    mat-icon {
+      padding-right: 10px;
+    }
+  }
+}
+
+mat-sidenav-content {
+  background-color: whitesmoke;
+}

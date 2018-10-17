@@ -1,0 +1,30 @@
+.container {
+  mat-card {
+    height: 95%;
+    width: 95%;
+    .toolbar {
+      border-bottom: 2px solid #8fc62a;
+      padding: 0 10px 10px 0;
+
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+        padding-top: 10px;
+      }
+      .save:hover {
+        background-color: #8fc62a;
+        color: white;
+      }
+      .cancel:hover {
+        background-color: #c62a2a;
+        color: white;
+      }
+    }
+
+    mat-card-content {
+      padding-top: 5px;
+      
+    }
+  }
+
+}

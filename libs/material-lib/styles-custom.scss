@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+@import '/styles-colors';
+
+@include mat-core();
+
+$mm-app-primary: mat-palette($mat-custom-black, 900);
+$mm-app-accent:  mat-palette($mat-custom-green, 300, A100, A400);
+$mm-app-warn:    mat-palette($mat-deep-orange, 900);
+$mm-app-theme: mat-light-theme($mm-app-primary, $mm-app-accent, $mm-app-warn);
+
+@include angular-material-theme($mm-app-theme); 

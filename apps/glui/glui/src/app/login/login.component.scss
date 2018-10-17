@@ -1,0 +1,32 @@
+.login-container {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.64), rgba(0, 0, 0, 0.25)), url('/assets/images/evora2.jpg');
+  //background: linear-gradient(to right, rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.20)), url('/assets/images/evora1.jpg');
+  background-size: cover;
+
+  .login-box {
+    color: darkgreen;
+    background-color: #15381088;
+    background-color: #ffffffc7;
+    padding: 20px 20px 20px 20px;
+    width: 30%;
+    border-radius: 10px;
+    .form-group {
+      padding: 10px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .form-control {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+        font-weight: bold;
+        background: darkgreen;
+        color: white;
+        height: 50px;
+      }
+    }
+  }
+}

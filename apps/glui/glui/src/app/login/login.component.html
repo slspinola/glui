@@ -1,0 +1,31 @@
+<div class="login-container" fxLayout="column" fxLayoutAlign="space-around center" fxFlexFill>
+  <div class="login-box">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': f.email.errors }" />
+          <mat-hint>
+            <div *ngIf="f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Username is required</div>
+            </div>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input matInput placeholder="Input" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': f.password.errors }" />
+          <mat-hint>
+            <div *ngIf="f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+          </mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <button mat-raised-button>Login</button>
+      </div>
+    </form>
+  </div>
+</div>

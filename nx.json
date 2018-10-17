@@ -7,5 +7,15 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "glui-glui": {
+      "tags": []
+    },
+    "glui-glui-e2e": {
+      "tags": []
+    },
+    "material-lib": {
+      "tags": []
+    }
+  }
 }

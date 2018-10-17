@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@glui/material-lib": [
+        "libs/material-lib/src/index.ts"
+      ]
     }
   },
   "exclude": [
