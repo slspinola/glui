@@ -11,7 +11,7 @@
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss",
-          "spec": false
+          "spec": true
         },
         "@schematics/angular:class": {
           "spec": false

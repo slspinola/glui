@@ -12,7 +12,7 @@ import { switchMap, first } from 'rxjs/operators';
 export class AuthService {
 
   user: Observable<User>;
-  fbUser: firebase.User;
+ //fbUser: firebase.User;
   isAuthenticated: BehaviorSubject<boolean>;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) { 

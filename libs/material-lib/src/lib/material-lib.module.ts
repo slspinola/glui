@@ -10,7 +10,8 @@ import { MatToolbarModule,
          MatInputModule,
          MatCardModule,
          MatTableModule,
-         MatChipsModule 
+         MatChipsModule,
+         MatDividerModule,
         } from '@angular/material';
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MatToolbarModule,
     MatInputModule,
     MatCardModule,
     MatTableModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDividerModule
   ],
   exports: [
     FlexLayoutModule, 
@@ -39,7 +41,8 @@ import { MatToolbarModule,
     MatInputModule,
     MatCardModule,
     MatTableModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDividerModule
   ]
 })
 export class MaterialLibModule {}

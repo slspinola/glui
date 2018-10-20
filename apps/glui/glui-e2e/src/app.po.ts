@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.css('glui-root h1')).getText();
+    return element(by.css('glui-root glui-toolbar mat-toolbar mat-toolbar-row .logo-text')).getText();
   }
 }

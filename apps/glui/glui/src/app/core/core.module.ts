@@ -25,8 +25,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   ],
   declarations: [],
   providers: [
-    AuthService,
-    AngularFireAuth
+    AngularFireAuth,
+    AuthService
   ]
 })
 export class CoreModule { }

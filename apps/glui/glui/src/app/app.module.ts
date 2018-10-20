@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NxModule } from '@nrwl/nx';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -15,10 +15,11 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { ProfileService } from './profile/profile.service';
 import { ServiceComponent } from './service/service/service.component';
 import { ServiceListComponent } from './service/service-list/service-list.component';
+import { EventListComponent } from './events/event-list/event-list.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, SidenavComponent, LoginComponent, HomeComponent, DashboardComponent, ProfileListComponent, ProfileComponent, ServiceComponent, ServiceListComponent],
+  declarations: [AppComponent, ToolbarComponent, SidenavComponent, LoginComponent, HomeComponent, DashboardComponent, ProfileListComponent, ProfileComponent, ServiceComponent, ServiceListComponent, EventListComponent],
   imports: [
     BrowserModule,
     NxModule.forRoot(),

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../profile.service';
+
 
 @Component({
   selector: 'glui-profile',
@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
 
   constructor(private location: Location,
-              private profileService: ProfileService,
               private formBuilder: FormBuilder) { 
 
               }
