@@ -36,4 +36,3 @@ jobs:
         
       # run tests!
       - run: npm run test glui-glui
-      - run: npm run e2e  glui-glui
