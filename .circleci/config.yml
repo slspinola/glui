@@ -23,6 +23,9 @@ jobs:
     steps:
       - checkout
 
+      - attach_workspace:
+          at: ~/glui
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -45,29 +48,29 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ./
+            - .
   
   # Build production dist
   build-prod:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: .
+          at: ~/glui
+      - run: npm install
       - run:
           name: Build production distribution for deploy
           command: ng build --prod
-
       - persist_to_workspace:
           root: .
           paths:
-            - ./
+            - .
 
   deploy:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: .
-
+          at: ~/glui
+      - run: npm install
       - run:
           name: Deploy Master to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
