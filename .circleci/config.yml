@@ -48,7 +48,6 @@ jobs:
           command: ng build --prod
 
   deploy:
-    - image: circleci/node:9.8
     steps:
       - run:
           name: Deploy Master to Firebase
