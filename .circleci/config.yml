@@ -38,6 +38,7 @@ jobs:
       - run: 
           name: Run unit tests
           command: npm run test glui-glui
+          
   
   # Build production dist
   build-prod:
@@ -47,11 +48,10 @@ jobs:
           command: ng build --prod
 
   deploy:
-       steps:
-         # Production build
-         - run:
-             name: Deploy Master to Firebase
-             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+    steps:
+      - run:
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
   
   workflows:
   version: 2
