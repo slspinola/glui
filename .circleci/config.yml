@@ -41,26 +41,38 @@ jobs:
       - run: 
           name: Run unit tests
           command: npm run test glui-glui
+
+      - persist_to_workspace:
+          root: .
           
   
   # Build production dist
   build-prod:
     executor: prod-executor
     steps:
+      - attach_workspace:
+          at: .
+
       - run:
           name: Build production distribution for deploy
           command: ng build --prod
 
+      - persist_to_workspace:
+          root: .
+
   deploy:
     executor: prod-executor
     steps:
+      - attach_workspace:
+          at: .
+
       - run:
           name: Deploy Master to Firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 
 workflows:
   version: 2.1
-  build-and-deploy:
+  test-build-deploy:
     jobs:
       - build
       - build-prod:
@@ -71,4 +83,4 @@ workflows:
             - build-prod
           filters:
             branches:
-              only: master
+              only: configci
