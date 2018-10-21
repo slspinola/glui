@@ -10,12 +10,12 @@ executors:
         environment:
             CHROME_BIN: "/usr/bin/google-chrome"
 
-    working_directory: ~/repo
+    working_directory: ~/glui
   prod-executor:
     docker:
       - image: circleci/node:9.8
 
-    working_directory: ~/repo
+    working_directory: ~/glui
 
 jobs:
   build:
@@ -43,31 +43,30 @@ jobs:
           command: npm run test glui-glui
 
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
-            - glui
+            - ./
   
   # Build production dist
   build-prod:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: ~/repo
-
+          at: .
       - run:
           name: Build production distribution for deploy
           command: ng build --prod
 
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
-            - glui
+            - ./
 
   deploy:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: .
 
       - run:
           name: Deploy Master to Firebase
