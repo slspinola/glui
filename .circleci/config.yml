@@ -54,15 +54,15 @@ jobs:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
   
   workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - build-prod
-      - deploy:
-          requires:
-            - build
-            - build-prod
-          filters:
-            branches:
-              only: master
+    version: 2
+    build-and-deploy:
+      jobs:
+        - build
+        - build-prod
+        - deploy:
+            requires:
+              - build
+              - build-prod
+            filters:
+              branches:
+                only: master
