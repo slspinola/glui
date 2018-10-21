@@ -35,4 +35,34 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: npm run test glui-glui
+      - run: 
+          name: Run unit tests
+          command: npm run test glui-glui
+  
+  # Build production dist
+  build-prod:
+    steps:
+      - run:
+          name: Build production distribution for deploy
+          command: ng build --prod
+
+  deploy:
+       steps:
+         # Production build
+         - run:
+             name: Deploy Master to Firebase
+             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+  
+  workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - build-prod
+      - deploy:
+          requires:
+            - build
+            - build-prod
+          filters:
+            branches:
+              only: master
