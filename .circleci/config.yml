@@ -2,21 +2,24 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  test-executor:
     docker:
-      # specify the version you desire here
       - image: circleci/node:9.8-browsers
         environment:
             CHROME_BIN: "/usr/bin/google-chrome"
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+  prod-executor:
+    docker:
+      - image: circleci/node:9.8
 
     working_directory: ~/repo
 
+jobs:
+  build:
+    executor: test-executor
     steps:
       - checkout
 
@@ -42,26 +45,29 @@ jobs:
   
   # Build production dist
   build-prod:
+    executor: prod-executor
     steps:
       - run:
           name: Build production distribution for deploy
           command: ng build --prod
 
   deploy:
+    executor: prod-executor
     steps:
       - run:
           name: Deploy Master to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-deploy:
     jobs:
       - build
-      - build-prod
-      - deploy:
+      - build-prod:
           requires:
             - build
+      - deploy:
+          requires:
             - build-prod
           filters:
             branches:
