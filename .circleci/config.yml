@@ -54,26 +54,11 @@ jobs:
   build-prod:
     executor: prod-executor
     steps:
-      - checkout
       - attach_workspace:
           at: ~/glui
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
       - run:
           name: Build production distribution for deploy
-          command: ng build --prod
+          command: npm run build --prod
       - persist_to_workspace:
           root: .
           paths:
@@ -82,23 +67,8 @@ jobs:
   deploy:
     executor: prod-executor
     steps:
-      - checkout
       - attach_workspace:
           at: ~/glui
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
       - run:
           name: Deploy Master to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
