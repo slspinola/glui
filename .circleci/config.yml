@@ -80,15 +80,18 @@ workflows:
       - build:
           filters:
             branches:
-              - development
-              - master
-              - production
+              only:
+                - development
+                - configci
+                - master
+                - production
       - build-prod:
           requires:
             - build
           filters:
             branches:
-              only: 
+              only:
+                - configci
                 - production
       - deploy:
           requires:
@@ -96,4 +99,5 @@ workflows:
           filters:
             branches:
               only: 
+                - configci
                 - production
