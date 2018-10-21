@@ -87,7 +87,7 @@ workflows:
                 - production
       - build-prod:
           requires:
-            - build
+            - test
           filters:
             branches:
               only:
