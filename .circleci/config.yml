@@ -43,28 +43,31 @@ jobs:
           command: npm run test glui-glui
 
       - persist_to_workspace:
-          root: /home/circleci
-          
+          root: ~/repo
+          paths:
+            - glui
   
   # Build production dist
   build-prod:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: /home/circleci
+          at: ~/repo
 
       - run:
           name: Build production distribution for deploy
           command: ng build --prod
 
       - persist_to_workspace:
-          root: /home/circleci
+          root: ~/repo
+          paths:
+            - glui
 
   deploy:
     executor: prod-executor
     steps:
       - attach_workspace:
-          at: /home/circleci
+          at: ~/repo
 
       - run:
           name: Deploy Master to Firebase
