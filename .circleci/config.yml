@@ -18,7 +18,7 @@ executors:
     working_directory: ~/glui
 
 jobs:
-  build:
+  test:
     executor: test-executor
     steps:
       - checkout
@@ -77,7 +77,7 @@ workflows:
   version: 2.1
   test-build-deploy:
     jobs:
-      - build:
+      - test:
           filters:
             branches:
               only:
@@ -99,5 +99,4 @@ workflows:
           filters:
             branches:
               only: 
-                - configci
                 - production
