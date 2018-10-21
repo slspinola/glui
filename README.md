@@ -1,6 +1,6 @@
-# Glui
+# GLUi - Gestão Limpeza Urbana Inteligente
 
-## UEVORA - Projeto Integrado I | GLUi - Gestão Limpeza Urbana Inteligente
+## UEVORA - Projeto Integrado I
 
 <a href="http://www.uevora.pt"><img src="http://www.uevora.pt/extension/uepages/design/ueunidade_layout2/images/layout/logotipo_site.jpg"></a>
 
