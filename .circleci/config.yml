@@ -77,13 +77,23 @@ workflows:
   version: 2.1
   test-build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              - development
+              - master
+              - production
       - build-prod:
           requires:
             - build
+          filters:
+            branches:
+              only: 
+                - production
       - deploy:
           requires:
             - build-prod
           filters:
             branches:
-              only: configci
+              only: 
+                - production
