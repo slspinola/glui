@@ -81,7 +81,7 @@ workflows:
           filters:
             branches:
               only:
-                - development
+                - test
                 - configci
                 - master
                 - production

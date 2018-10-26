@@ -6,6 +6,7 @@ import { User, Email } from './user.model';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { switchMap, first } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })

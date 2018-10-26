@@ -10,20 +10,23 @@ import { Profile } from '../profile.model';
 
 const input: Profile[] = [
   { 
+    id: 'qqqqqq',
     user_uid: 'abc123',
     name: 'name', 
     lastname: 'lastname', 
     active: true,
-    function: ['worker','worker']
+    jobs: ['worker','worker'],
+    email: 'slss@slss.pt'
   },
   { 
+    id: 'qqqqqq',
     user_uid: 'abc123',
     name: 'name', 
     lastname: 'lastname', 
     active: true,
-    function: ['worker','worker']
-  },
-
+    jobs: ['worker','worker'],
+    email: 'slss@slss.pt'
+  }
 ];
 
 const data = of(input);

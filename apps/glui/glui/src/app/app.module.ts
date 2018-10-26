@@ -19,7 +19,18 @@ import { EventListComponent } from './events/event-list/event-list.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, SidenavComponent, LoginComponent, HomeComponent, DashboardComponent, ProfileListComponent, ProfileComponent, ServiceComponent, ServiceListComponent, EventListComponent],
+  declarations: [
+    AppComponent, 
+    ToolbarComponent, 
+    SidenavComponent, 
+    LoginComponent, 
+    HomeComponent, 
+    DashboardComponent, 
+    ProfileListComponent, 
+    ProfileComponent, 
+    ServiceComponent, 
+    ServiceListComponent, 
+    EventListComponent],
   imports: [
     BrowserModule,
     NxModule.forRoot(),

@@ -1,7 +1,9 @@
 export interface Profile {
+  id: string;
   user_uid: string,
   name: string,
   lastname: string,
   active: boolean,
-  function: string[],
+  jobs: string[],
+  email: string,
 }

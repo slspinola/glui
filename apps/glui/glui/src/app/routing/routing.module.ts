@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'glui', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
   { path: 'profiles', component: ProfileListComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'service', component: ServiceComponent, canActivate: [AuthGuard]},

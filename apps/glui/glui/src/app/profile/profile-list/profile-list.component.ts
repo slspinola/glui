@@ -12,7 +12,7 @@ import {MatTableDataSource} from '@angular/material'
 })
 export class ProfileListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'lastname', 'function', 'edit'];
+  displayedColumns: string[] = ['name', 'lastname', 'email', 'jobs', 'edit', 'delete'];
   dataSource: MatTableDataSource<Profile>;
 
   profileList: Observable<Profile[]>
@@ -37,8 +37,8 @@ export class ProfileListComponent implements OnInit {
     this._showFilter = !this._showFilter;
   }
 
-  addUser(): void{
-    
+  deleteProfile(profileId: string): void{
+    this.profileService.deleteProfile(profileId);
   }
 
 }

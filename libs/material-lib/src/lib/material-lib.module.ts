@@ -12,6 +12,8 @@ import { MatToolbarModule,
          MatTableModule,
          MatChipsModule,
          MatDividerModule,
+         MatAutocompleteModule,
+         MatProgressSpinnerModule
         } from '@angular/material';
 
 @NgModule({
@@ -28,7 +30,9 @@ import { MatToolbarModule,
     MatCardModule,
     MatTableModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     FlexLayoutModule, 
@@ -42,7 +46,9 @@ import { MatToolbarModule,
     MatCardModule,
     MatTableModule,
     MatChipsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialLibModule {}
