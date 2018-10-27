@@ -28,7 +28,7 @@ const input: Profile[] = [
 const data = of(input);
 
 const collectionStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+  snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data)
 }
 
 const AngularFiresotreStub = {

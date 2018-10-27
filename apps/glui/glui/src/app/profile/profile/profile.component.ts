@@ -153,40 +153,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     )
   }
 
-  addProfileWithUser(): void {
-    const email = {
-      email: this.profileForm.controls.email.value,
-      password: this.groupForm.controls.password.value
-    }
-    this.profile = this.profileForm.value;
-    const displayName = `${this.profile.name} ${this.profile.lastname}`
-    console.log(email);
-    console.log(this.profile)
-        
-    this.profileService.createUser(email, displayName)
-    .subscribe(uid => {
-        this.profile.user_uid = uid;
-        this.profileService.addProfile(this.profile).subscribe(
-          _profile => {
-            if(_profile.user_uid = uid){
-              this.finish();
-            }
-          },
-          error => {
-            this.errorHandler(error);
-          }
-        )
-      }
-    )
-  }
-
   finish(): void{
     this.spinnerOn = false;
     this.location.back();
-  }
-
-  test(): void{
-    this.profileService.test();
   }
 
   add(event: MatChipInputEvent): void {

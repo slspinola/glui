@@ -6,23 +6,18 @@
 
 ## GLUi Platform
 
-[https://glui-iot.firebaseapp.com](https://glui-iot.firebaseapp.com)
+Aceder à plataforma através do url [https://glui-iot.firebaseapp.com](https://glui-iot.firebaseapp.com)
 
-## Author
+## Autor
 
 [Sergio Spinola](https://sergio-spinola.firebaseapp.com)
 
-Projeto desenvolvido com [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx).
+Projeto desenvolvido com [Angular CLI](https://github.com/angular/angular-cli) usando [Nrwl Nx](https://nrwl.io/nx).
 
-## Development server
+## Desenvolvimento
 
-Run `ng serve glui-glui` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Correr `ng serve glui-glui` no servidor de desenvolvimento. Navegar até `http://localhost:4200/`.
 
-## Running unit tests
+## Correr Testes Unitários
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Correr `ng test` para executar testes via [Karma](https://karma-runner.github.io).

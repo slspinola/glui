@@ -4,7 +4,7 @@ import { ProfileListComponent } from './profile-list.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProfileService } from '../profile.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { Profile } from '../profile.model';
 
 

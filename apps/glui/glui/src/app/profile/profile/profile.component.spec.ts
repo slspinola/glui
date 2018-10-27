@@ -3,6 +3,30 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileComponent } from './profile.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfileService } from '../profile.service';
+import { of } from 'rxjs';
+import { Profile } from '../profile.model';
+
+const input: Profile[] = [
+  { 
+    id: 'qqqqqq',
+    user_uid: 'abc123',
+    name: 'name', 
+    lastname: 'lastname', 
+    active: true,
+    jobs: ['worker','worker'],
+    email: 'slss@slss.pt'
+  },
+  { 
+    id: 'qqqqqq',
+    user_uid: 'abc123',
+    name: 'name', 
+    lastname: 'lastname', 
+    active: true,
+    jobs: ['worker','worker'],
+    email: 'slss@slss.pt'
+  }
+];
 
 
 describe('ProfileComponent', () => {
