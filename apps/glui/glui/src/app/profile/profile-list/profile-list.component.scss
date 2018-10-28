@@ -19,6 +19,11 @@
 
     mat-card-content {
       padding-top: 10px;
+
+      .filtro-tabela{
+        width: 100%;
+      }
+
       table {
         width: 100%;
         .row-button {

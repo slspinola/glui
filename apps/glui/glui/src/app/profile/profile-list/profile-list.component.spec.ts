@@ -32,6 +32,7 @@ const input: Profile[] = [
 const data = of(input);
 
 const collectionStub = {
+  snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data),
   valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
 }
 
@@ -47,7 +48,7 @@ describe('ProfileListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProfileListComponent ],
       imports: [ 
-        MatTableModule 
+        MatTableModule
       ],
       providers:[
         ProfileService,

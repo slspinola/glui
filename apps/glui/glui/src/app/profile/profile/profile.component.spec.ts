@@ -3,9 +3,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileComponent } from './profile.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProfileService } from '../profile.service';
-import { of } from 'rxjs';
 import { Profile } from '../profile.model';
+import { MatAutocompleteModule } from '@angular/material';
+import { of } from 'rxjs';
+import { ProfileService } from '../profile.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 const input: Profile[] = [
   { 
@@ -28,6 +31,17 @@ const input: Profile[] = [
   }
 ];
 
+const data = of(input);
+
+const collectionStub = {
+  snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data),
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+}
+
+const AngularFiresotreStub = {
+  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+}
+
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -42,10 +56,12 @@ describe('ProfileComponent', () => {
       declarations: [ ProfileComponent ],
       imports:[
         RouterTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatAutocompleteModule
       ],
       providers: [
-        //{ provide: Location, useValue: locationStub }
+        ProfileService,
+        {provide: AngularFirestore, useValue: AngularFiresotreStub}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
