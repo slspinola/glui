@@ -4,11 +4,15 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../core/auth.service';
-import { of, BehaviorSubject } from 'rxjs';
+import { of, BehaviorSubject, Observable } from 'rxjs';
 
 class AuthenticationServiceStub {
   isAuthenticated: BehaviorSubject<boolean>;
   login(email: string, password: string){};
+
+  isUserAuthenticated(): Observable<boolean> {
+    return this.isAuthenticated.asObservable();
+  }
 }
 
 class AngularFireAuthStub {
@@ -26,7 +30,7 @@ describe('SidenavComponent', () => {
   let component: SidenavComponent;
   let fixture: ComponentFixture<SidenavComponent>;
   const mockAuthService: AuthenticationServiceStub = new AuthenticationServiceStub();
-  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(false);
+  mockAuthService.isAuthenticated = new BehaviorSubject<boolean>(true);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

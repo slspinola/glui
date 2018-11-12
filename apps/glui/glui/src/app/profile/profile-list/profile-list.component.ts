@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import { Observable } from 'rxjs';
 import { Profile } from '../profile.model';
-import {MatTableDataSource} from '@angular/material'
+import {MatTableDataSource} from '@angular/material';
 
 
 @Component({
@@ -18,15 +18,13 @@ export class ProfileListComponent implements OnInit {
   profileList: Observable<Profile[]>
   _showFilter = false;
 
-  constructor(private profileService: ProfileService) { 
-    profileService.getProfiles().subscribe(data => {
+  constructor(private profileService: ProfileService) {}
+
+  ngOnInit() {
+    this.profileService.getProfiles().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       console.log(data);
     });
-    //console.log(this.profileList);
-   }
-
-  ngOnInit() {
   }
 
   applyFilter(filterValue: string) {

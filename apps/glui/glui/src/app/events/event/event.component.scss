@@ -1,0 +1,75 @@
+.container {
+  mat-card {
+    height: 95%;
+    width: 95%;
+
+    .overlay {
+      position: fixed; /* Sit on top of the page content */
+      width: 100%; /* Full width (cover the whole page) */
+      height: 100%; /* Full height (cover the whole page) */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+      z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer; /* Add a pointer on hover */
+    }
+
+    .toolbar {
+      border-bottom: 2px solid #8fc62a;
+      padding: 0 10px 10px 0;
+
+      .title {
+        font-weight: bold;
+        font-size: 20px;
+        padding-top: 10px;
+      }
+      .save:hover {
+        background-color: #8fc62a;
+        color: white;
+      }
+      .cancel:hover {
+        background-color: #c62a2a;
+        color: white;
+      }
+    }
+
+    mat-card-content {
+      padding: 15px 10px 0 10px;
+      height: 95%;
+
+      .image-section {
+        padding: 15px;
+        img {
+          border: 1px solid #dce4cc;
+          border-radius: 5%;
+          padding: 10px;
+        }
+      }
+
+      .location-section {
+        padding-top: 10px;
+
+        .longitude-input {
+          padding-left: 15px;
+        }
+      }
+
+      .map-section {
+        //padding-top: 10px;
+        agm-map {
+          //margin-top: 5px;
+          height: 90%;
+        }
+      }
+
+      .date-input {
+      }
+
+      .description-input {
+        width: 100%;
+      }
+    }
+  }
+}

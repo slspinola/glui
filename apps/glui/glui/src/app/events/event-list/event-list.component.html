@@ -1,3 +1,57 @@
-<p>
-  event-list works!
-</p>
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
+  <mat-card>
+    <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
+      <div class="title" fxFlex fxFlexAlign="start">
+        <span>Lista de Ocorrências</span>
+      </div>
+      <div fxFlex fxLayoutAlign="end">
+        <button mat-icon-button (click)="showFilter()">
+          <mat-icon class="icon" aria-label="Editar">filter_list</mat-icon>
+        </button>
+        <a mat-icon-button routerLink="/event">
+          <mat-icon class="icon" aria-label="Editar">add</mat-icon>
+        </a>
+      </div>
+    </div>
+    <mat-card-content>
+      <mat-form-field class="filter-table" *ngIf="_showFilter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Descrição">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="eventDate">
+          <th mat-header-cell *matHeaderCellDef> Data da Ocorrêcia </th>
+          <td mat-cell *matCellDef="let event"> {{event.eventDate | date : 'dd/MM/yyyy h.mma'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Editar </th>
+          <td class="row-button" mat-cell *matCellDef="let event">
+            <button mat-icon-button>
+              <a mat-icon-button routerLink="/event/{{event.id}}">
+                <mat-icon class="icon" aria-label="Editar">edit</mat-icon>
+              </a>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Apagar </th>
+          <td class="row-button" mat-cell *matCellDef="let event">
+            <button color="warn" mat-icon-button (click)="deleteEvent(event.id)">
+              <mat-icon class="icon" aria-label="Apagar">delete_forever</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

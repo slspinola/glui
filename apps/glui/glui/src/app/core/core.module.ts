@@ -7,6 +7,9 @@ import { AuthService } from './auth.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AgmCoreModule } from '@agm/core';
+import { UploadFileModule } from '@glui/upload-file';
 
 
 @NgModule({
@@ -15,17 +18,26 @@ import { AngularFireAuth } from '@angular/fire/auth';
     RoutingModule,
     MaterialLibModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA9B5lKRV1rYLROsZamGMRDpwZ_VPXlNA4',
+      libraries: ["places"]
+    }),
+    UploadFileModule
   ],
   exports: [
     RoutingModule,
     MaterialLibModule,
     AngularFirestoreModule,
-    AngularFireModule
+    AngularFireModule,
+    AgmCoreModule,
+    UploadFileModule
   ],
-  declarations: [],
+  declarations: [
+  ],
   providers: [
     AngularFireAuth,
+    AngularFireStorage,
     AuthService
   ]
 })

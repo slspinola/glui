@@ -36,7 +36,7 @@ export class ProfileService {
   addProfile(profile: Profile): Observable<Profile> {
     return from(this.profilesCollection.add(profile)
       .then(_profile => {
-        return _profile;
+        return _profile.id;
       })
       .catch(err => {
         return err;
@@ -60,7 +60,7 @@ export class ProfileService {
     this.profileDocument.delete();
   }
 
-  resetDocunment(): void {
+  resetDocument(): void {
     this.profileDocument = null;
   }
 }

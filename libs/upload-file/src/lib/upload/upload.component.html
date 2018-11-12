@@ -1,0 +1,51 @@
+<div *ngIf="!showPreview" class="upload-container" libDropzone
+    (hovered)="toggleHover($event)"
+     (dropped)="previewImage($event)"
+     [class.hovering]="isHovering">
+  <div class="dropzone">
+
+      <h3>Adicionar Fotografia</h3>
+      <p>Arraste e largue o ficheiro</p>
+      <div class="file">
+          <label class="file-label">
+          <button mat-raised-button color="accent" (click)="imgFileInput.click()">
+              <mat-icon class="icon" aria-label="Adicionar Local">add_a_photo</mat-icon>ou escolha um ficheiro</button>
+              <input hidden class="file-input" #imgFileInput type="file" (change)="previewImage($event.target.files)">
+
+
+            
+          </label>
+        </div>
+  </div>
+</div>
+<div *ngIf="percentage | async as pct">
+
+  <progress class="progress is-info" 
+            [value]="pct" 
+            max="100">        
+  </progress>
+
+  {{ pct | number }}%
+
+</div>
+
+<div *ngIf="showPreview" class="image-preview">
+  <img src="{{imageSrc}}">
+</div>
+
+<div *ngIf="(snapshot | async) as snap">
+  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
+
+
+<div *ngIf="downloadURL | async as url">
+  <h3>Results!</h3>
+  <img [src]="url"><br>
+  <a [href]="url" target="_blank" rel="noopener">Download Me!</a>
+</div> 
+<hr>
+<!--
+<button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
+<button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
+<button (click)="task.resume()" class="button is-info"   [disabled]="!(snap?.state === 'paused')">Resume</button>
+-->
+</div>

@@ -16,6 +16,9 @@
     },
     "material-lib": {
       "tags": []
+    },
+    "upload-file": {
+      "tags": []
     }
   }
 }

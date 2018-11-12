@@ -1,13 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { MatTableModule } from '@angular/material';
-import { EventListComponent } from './event-list.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { EventService } from '../event.service';
-import { Event } from '../event.model';
+import { TestBed } from '@angular/core/testing';
+import { EventService } from './event.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { firestore } from 'firebase';
 import { of } from 'rxjs';
+import { Event } from './event.model';
+import { firestore } from 'firebase';
 
 const input: Event[] = [
   {
@@ -47,34 +43,17 @@ const AngularFiresotreStub = {
   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
 };
 
-describe('EventListComponent', () => {
-  let component: EventListComponent;
-  let fixture: ComponentFixture<EventListComponent>;
-
-  beforeEach(async(() => {
+describe('EventService', () => {
+  beforeEach(() =>
     TestBed.configureTestingModule({
-      declarations: [ EventListComponent ],
-      imports:[
-        RouterTestingModule,
-        MatTableModule
-
-      ],
       providers: [
         EventService,
-        {provide: AngularFirestore, useValue: AngularFiresotreStub}
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
-  }));
+        { provide: AngularFirestore, useValue: AngularFiresotreStub }
+      ]
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EventListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    const service: EventService = TestBed.get(EventService);
+    expect(service).toBeTruthy();
   });
 });

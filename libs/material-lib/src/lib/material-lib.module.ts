@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatToolbarModule,
          MatSidenavModule, 
          MatIconModule,
@@ -13,7 +14,11 @@ import { MatToolbarModule,
          MatChipsModule,
          MatDividerModule,
          MatAutocompleteModule,
-         MatProgressSpinnerModule
+         MatProgressSpinnerModule,
+         MatNativeDateModule,
+         MatDatepickerModule,
+         MatSelectModule,
+         MatOptionModule
         } from '@angular/material';
 
 @NgModule({
@@ -32,7 +37,12 @@ import { MatToolbarModule,
     MatChipsModule,
     MatDividerModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   exports: [
     FlexLayoutModule, 
@@ -48,7 +58,12 @@ import { MatToolbarModule,
     MatChipsModule,
     MatDividerModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class MaterialLibModule {}

@@ -14,7 +14,7 @@
       </div>
     </div>
     <mat-card-content>
-      <mat-form-field class="filtro-tabela" *ngIf="_showFilter">
+      <mat-form-field class="filter-table" *ngIf="_showFilter">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Nome, Apelido, Email, Função">
       </mat-form-field>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

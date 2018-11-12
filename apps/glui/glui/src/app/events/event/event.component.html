@@ -1,0 +1,102 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
+
+  <mat-card>
+    <div class="overlay" *ngIf="spinnerOn" fxLayoutAlign="center center">
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
+      <div class="title" fxFlex fxFlexAlign="start">
+        <span>Ocorrência</span>
+      </div>
+      <div fxFlex fxLayoutAlign="end">
+        <button (click)="submit()" class="save" mat-icon-button>
+          <mat-icon class="icon" aria-label="Editar">save</mat-icon>
+        </button>
+        <button class="cancel" mat-icon-button (click)="cancel()">
+          <mat-icon class="icon" aria-label="Editar">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-card-content>
+      <form [formGroup]="eventForm" fxFlex>
+        <div fxLayout="column" class="form-group" fxFlex>
+          <div fxLayout="row" >
+          <div fxLayout="column" >
+            <mat-form-field appearance="outline" class="date-input" color="primary">
+              <mat-label>Data da Ocorrêcia</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Escolha uma data" 
+                  formControlName="eventDate" class="form-control" required >
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker ></mat-datepicker>
+              <mat-hint>
+                <div *ngIf="f.eventDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.eventDate.errors.required">Data é obrigatório</div>
+                </div>
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline"> 
+                <mat-label>Estado</mat-label>
+                <mat-select MatInput formControlName="state" (selectionChange)="onChangeSelect($event)" placeholder="Estado" required>
+                  <mat-option *ngFor="let state of eventState"  [value]="state.state">{{state.state}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="image-section" fxLayoutAlign="end none" fxFlex>
+             <img *ngIf="!isNew" src="{{imageSrc}}" height="150px"/>
+             <lib-upload (fileUrl)="fileUrlHandler($event)" (imageAdded)="imageAddedHandler($event)" [runUpload]="runUpload" *ngIf="isNew" ></lib-upload>
+          </div>
+        </div>
+          <div fxLayout="column">
+            <mat-form-field class="description-input" appearance="outline" color="primary">
+              <mat-label>Descrição</mat-label>
+              <input matInput placeholder="Descrição" type="text" formControlName="description" class="form-control"
+                [ngClass]="{ 'is-invalid': f.description.errors }" required />
+              <mat-hint>
+                <div *ngIf="f.description.errors" class="invalid-feedback">
+                  <div *ngIf="f.description.errors.required">Descrição é obrigatório</div>
+                </div>
+              </mat-hint>
+            </mat-form-field>
+            <div class="location-section" fxLayout="row">
+                <mat-form-field class="latitude-input" appearance="outline" color="primary">
+                    <mat-label>Latitude</mat-label>
+                    <input matInput placeholder="Latitude" type="number" formControlName="latitude" class="form-control"
+                      [ngClass]="{ 'is-invalid': f.latitude.errors }" required />
+                    <mat-hint>
+                      <div *ngIf="f.latitude.errors" class="invalid-feedback">
+                        <div *ngIf="f.latitude.errors.required">Latitude é obrigatório</div>
+                      </div>
+                    </mat-hint>
+                  </mat-form-field>
+                  <mat-form-field class="longitude-input" appearance="outline" color="primary">
+                      <mat-label>Longitude</mat-label>
+                      <input matInput placeholder="longitude" type="number" formControlName="longitude" class="form-control"
+                        [ngClass]="{ 'is-invalid': f.longitude.errors }" required />
+                      <mat-hint>
+                        <div *ngIf="f.longitude.errors" class="invalid-feedback">
+                          <div *ngIf="f.longitude.errors.required">Longitude é obrigatório</div>
+                        </div>
+                      </mat-hint>
+                    </mat-form-field>
+            </div>
+        </div>
+        <div class="map-section" fxLayout="column" fxFlex>
+            <mat-form-field class="form-group" color="accent" [style.fontSize.px]="18">
+                <input matInput placeholder="Pesquise a rua" 
+                      autocorrect="off" autocapitalize="off" 
+                      spellcheck="off" type="text" 
+                      class="form-control" #search formControlName="searchControl">
+                      <mat-hint [style.fontSize.px]="10">
+                          Pesquise o local e em seguida faça duplo clique sobre o mapa no ponto que deseja registar.
+                        </mat-hint>
+            </mat-form-field>
+            <agm-map (mapDblClick)="mapDblClick($event)" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom" fxFlex>     
+              <agm-marker [markerDraggable]="marker.drag" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+              </agm-map>
+        </div>
+      </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

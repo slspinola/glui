@@ -27,6 +27,7 @@
   },
   "private": true,
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.5",
     "@angular/animations": "^6.1.10",
     "@angular/cdk": "^6.4.7",
     "@angular/common": "^6.1.0",
@@ -36,6 +37,7 @@
     "@angular/flex-layout": "6.0.0-beta.18",
     "@angular/forms": "^6.1.0",
     "@angular/material": "^6.4.7",
+    "@angular/material-moment-adapter": "^7.0.2",
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
@@ -45,6 +47,7 @@
     "@nrwl/nx": "6.4.0",
     "core-js": "^2.5.4",
     "firebase": "^5.5.4",
+    "moment": "^2.22.2",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
@@ -55,6 +58,7 @@
     "@angular/language-service": "^6.1.0",
     "@ngrx/store-devtools": "6.1.0",
     "@nrwl/schematics": "6.4.0",
+    "@types/googlemaps": "^3.30.16",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

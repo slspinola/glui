@@ -16,6 +16,8 @@ import { ProfileService } from './profile/profile.service';
 import { ServiceComponent } from './service/service/service.component';
 import { ServiceListComponent } from './service/service-list/service-list.component';
 import { EventListComponent } from './events/event-list/event-list.component';
+import { EventService } from './events/event.service';
+import { EventComponent } from './events/event/event.component';
 
 
 @NgModule({
@@ -26,11 +28,10 @@ import { EventListComponent } from './events/event-list/event-list.component';
     LoginComponent, 
     HomeComponent, 
     DashboardComponent, 
-    ProfileListComponent, 
-    ProfileComponent, 
-    ServiceComponent, 
-    ServiceListComponent, 
-    EventListComponent],
+    ProfileListComponent, ProfileComponent, 
+    ServiceComponent, ServiceListComponent, 
+    EventListComponent, EventComponent, 
+  ],
   imports: [
     BrowserModule,
     NxModule.forRoot(),
@@ -38,7 +39,7 @@ import { EventListComponent } from './events/event-list/event-list.component';
     BrowserAnimationsModule,
     CoreModule
   ],
-  providers: [ProfileService],
+  providers: [ProfileService, EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

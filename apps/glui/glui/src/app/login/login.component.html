@@ -25,6 +25,9 @@
       </div>
       <div class="form-group">
         <button mat-raised-button>Login</button>
+        <mat-hint *ngIf="loginError">
+          <div class="error-msg">{{errorMsg}}</div>
+        </mat-hint>
       </div>
     </form>
   </div>

@@ -1,14 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Profile } from '../profile.model';
-import { COMMA, ENTER, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { ProfileService } from '../profile.service';
 import { ActivatedRoute } from '@angular/router';
-import { errorHandler } from '@angular/platform-browser/src/browser';
 
 function passwordConfirming(c: AbstractControl): any {
   if(!c.parent || !c) return;
@@ -20,7 +19,6 @@ function passwordConfirming(c: AbstractControl): any {
       return { invalid: true };
   }
 }
-
 
 @Component({
   selector: 'glui-profile',
@@ -72,12 +70,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 
     const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     if( id!==null ) {
     this.profileService.getProfile(id).subscribe(
       _profile => {
         this.profile = _profile;
-        console.log(this.profile)
         this.isNew = false;
         this.setProfileForm();
       });
@@ -89,10 +85,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.profileService.resetDocunment();
+    this.profileService.resetDocument();
   }
 
-  setProfileForm() {
+  setProfileForm(): void {
     this.profileForm = this.formBuilder.group({
       name: [this.profile.name, Validators.required],
       lastname: [this.profile.lastname, Validators.required],
@@ -114,7 +110,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   get f() { return this.profileForm.controls; }
   get fg() { return this.groupForm.controls; }
 
-  submit(){
+  submit(): void {
     this.spinnerOn = true;
     if(this.isNew){
       this.addProfile();
@@ -122,19 +118,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     else {
       this.updateProfile();
     }
-  }
-
-  updateProfile(): void {
-    this.profile = this.profileForm.value;
-    this.profileService.updateProfile(this.profile)
-    .subscribe(() => {
-      console.log("### Updated Profile ###");
-      this.finish();
-    },
-    error => {
-      this.errorHandler(error);
-    }
-    );
   }
 
   addProfile():void {
@@ -153,25 +136,33 @@ export class ProfileComponent implements OnInit, OnDestroy {
     )
   }
 
-  finish(): void{
+  updateProfile(): void {
+    this.profile = this.profileForm.value;
+    this.profileService.updateProfile(this.profile)
+    .subscribe(() => {
+      this.finish();
+    },
+    error => {
+      this.errorHandler(error);
+    }
+    );
+  }
+
+  finish(): void {
     this.spinnerOn = false;
     this.location.back();
   }
 
   add(event: MatChipInputEvent): void {
-    // Add job only when MatAutocomplete is not open
-    // To make sure this does not conflict with OptionSelected Event
     if (!this.matAutocomplete.isOpen) {
       const input = event.input;
       const value = event.value;
 
-      // Add our job
       if ((value || '').trim()) {
         this.profile.jobs.push(value.trim());
         this.profileForm.get('jobs').setValue(this.profile.jobs);
       }
 
-      // Reset the input value
       if (input) {
         input.value = '';
       }

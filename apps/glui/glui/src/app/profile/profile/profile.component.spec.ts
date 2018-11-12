@@ -12,8 +12,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 const input: Profile[] = [
   { 
-    id: 'qqqqqq',
-    user_uid: 'abc123',
+    id: 'id',
+    user_uid: 'useruid',
     name: 'name', 
     lastname: 'lastname', 
     active: true,
@@ -21,8 +21,8 @@ const input: Profile[] = [
     email: 'slss@slss.pt'
   },
   { 
-    id: 'qqqqqq',
-    user_uid: 'abc123',
+    id: 'id',
+    user_uid: 'useruid',
     name: 'name', 
     lastname: 'lastname', 
     active: true,

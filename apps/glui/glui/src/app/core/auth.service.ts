@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User, Email } from './user.model';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { switchMap, first } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject, from, throwError } from 'rxjs';
+import { switchMap, first, catchError } from 'rxjs/operators';
+import { ErrorCodes } from './error.model';
 
 
 @Injectable({
@@ -34,6 +35,10 @@ export class AuthService {
     )
   }
 
+  isUserAuthenticated(): Observable<boolean> {
+    return this.isAuthenticated.asObservable();
+  }
+
   getUser(): Promise<User> {
     return this.user.pipe(first()).toPromise();
 
@@ -44,20 +49,25 @@ export class AuthService {
     this.isAuthenticated.next(show);
   }
 
-  login(credentials: Email) {
-    this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
+  login(credentials: Email): Observable<boolean> {
+    return from(this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
     .then(
       fbUser => {
+        let userExists = false;
         if(fbUser !== undefined && fbUser!== null){
           this.updateIsAuthenticated(true);
           this.router.navigate(['/glui']);
           this.updateUserData(fbUser.user);
+          userExists = true;
         }
+        return userExists;
       })
-    .catch(
-      error => {
-        this.handleError(error);
-      }
+    ).pipe(
+      catchError(error => {
+        const err = ErrorCodes[error.code];
+        console.log(error);
+       return throwError(err)
+      })
     )
   }
 
@@ -65,7 +75,7 @@ export class AuthService {
     this.afAuth.auth.signOut().then(
       () => {
         this.updateIsAuthenticated(false);
-        this.router.navigate(['/login']);
+          this.router.navigate(['/login']);
       }
     )
   }

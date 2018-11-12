@@ -1,5 +1,5 @@
 <mat-sidenav-container fxFlex>
-    <mat-sidenav class="sidenav-container"  *ngIf="showMenu" opened mode="side" >
+    <mat-sidenav class="sidenav-container"  *ngIf="showMenu$ | async" opened mode="side" >
         <mat-list>
           <img src="assets/logo/cmevora.jpg" alt="">
           <mat-divider></mat-divider>

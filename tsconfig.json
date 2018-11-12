@@ -18,6 +18,9 @@
     "paths": {
       "@glui/material-lib": [
         "libs/material-lib/src/index.ts"
+      ],
+      "@glui/upload-file": [
+        "libs/upload-file/src/index.ts"
       ]
     }
   },

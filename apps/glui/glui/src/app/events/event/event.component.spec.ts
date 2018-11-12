@@ -1,16 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MatTableModule } from '@angular/material';
-import { EventListComponent } from './event-list.component';
+import { EventComponent } from './event.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EventService } from '../event.service';
 import { Event } from '../event.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import { of } from 'rxjs';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+import { MatSelectModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-const input: Event[] = [
-  {
+const input: Event =
+  { 
     uid: 'testuid',
     user_uid: 'useruid',
     service_uid: 'serviceuid',
@@ -21,20 +24,7 @@ const input: Event[] = [
     state: 'novo',
     createdAt: Date.now(),
     active: true
-  },
-  {
-    uid: 'testuid',
-    user_uid: 'useruid',
-    service_uid: 'serviceuid',
-    description: 'description',
-    location: new firestore.GeoPoint(38.5490182, -7.91107599),
-    eventDate: Date.now(),
-    imageUrl: 'http://www.pde.uk.com/uploads/images/660-plastic-bin-cutout.jpg',
-    state: 'novo',
-    createdAt: Date.now(),
-    active: true
-  }
-];
+  };
 
 const data = of(input);
 
@@ -47,21 +37,36 @@ const AngularFiresotreStub = {
   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
 };
 
-describe('EventListComponent', () => {
-  let component: EventListComponent;
-  let fixture: ComponentFixture<EventListComponent>;
+const mapsStub = {
+  load: jasmine.createSpy('load').and.returnValue(new Promise(() => {
+    return true;
+  }))
+};
+
+describe('EventComponent', () => {
+  let component: EventComponent;
+  let fixture: ComponentFixture<EventComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventListComponent ],
+      declarations: [ EventComponent ],
       imports:[
+        BrowserAnimationsModule,
         RouterTestingModule,
-        MatTableModule
-
+        ReactiveFormsModule,
+        AgmCoreModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule
       ],
       providers: [
         EventService,
-        {provide: AngularFirestore, useValue: AngularFiresotreStub}
+        MapsAPILoader,
+        {provide: AngularFirestore, useValue: AngularFiresotreStub},
+        {
+          provide: MapsAPILoader,
+          useValue: mapsStub
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -69,7 +74,7 @@ describe('EventListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventListComponent);
+    fixture = TestBed.createComponent(EventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
