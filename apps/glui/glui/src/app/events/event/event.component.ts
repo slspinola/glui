@@ -11,6 +11,7 @@ import { MatSelectChange } from '@angular/material';
 import { MouseEvent, MapsAPILoader } from '@agm/core';
 import { Subject } from 'rxjs';
 import { firestore } from 'firebase';
+import moment = require('moment');
 
 export const MY_FORMATS = {
   parse: {
@@ -47,6 +48,7 @@ export class EventComponent implements OnInit, OnDestroy {
   eventState = EventState;
   imageSrc = '/assets/images/image.jpg';
   hasImage = false;
+  showImageSpinner = false;
   runUpload: Subject<string> = new Subject();
   public searchControl: FormControl;
 
@@ -83,20 +85,27 @@ export class EventComponent implements OnInit, OnDestroy {
       eventDate: Date.now(),
       imageUrl: '',
       state: '',
-      createdAt: parseFloat((new Date(Date.now()).getTime() / 1000).toFixed(0)),
+      createdAt: moment().valueOf(),
       active: true
     };
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
+      this.showImageSpinner=true;
+      this.isNew = false;
       this.eventService.getEvent(id).subscribe(_event => {
         this.event = _event;
         console.log(this.event);
-        this.isNew = false;
+        this.imageSrc = this.event.imageUrl;
         this.setEventForm();
+        
       });
     }
     this.setEventForm();
     this.mapSetup();
+  }
+
+  imageLoaded(){
+    this.showImageSpinner = false;
   }
 
   ngOnDestroy(): void {
@@ -113,12 +122,13 @@ export class EventComponent implements OnInit, OnDestroy {
   }
 
   setEventForm(): void {
+    const date = moment(this.event.eventDate);
     this.eventForm = this.formBuilder.group({
       description: [this.event.description, Validators.required],
       state: [this.event.state, Validators.required],
       latitude: [this.event.location.latitude, Validators.required],
       longitude: [this.event.location.longitude, Validators.required],
-      eventDate: [this.event.eventDate, Validators.required],
+      eventDate: [date, Validators.required],
       searchControl: new FormControl()
     });
   }
@@ -141,7 +151,7 @@ export class EventComponent implements OnInit, OnDestroy {
     this.event.description = this.eventForm.value.description;
     this.event.state = this.eventForm.value.state;
 
-    this.event.eventDate = this.eventForm.value.eventDate.unix();
+    this.event.eventDate = moment(this.eventForm.value.eventDate).valueOf();
     const lat: number = parseFloat(this.eventForm.value.latitude);
     const lng: number = parseFloat(this.eventForm.value.longitude);
     this.event.location = new firestore.GeoPoint(lat, lng);

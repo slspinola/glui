@@ -43,7 +43,7 @@
               </mat-form-field>
           </div>
           <div class="image-section" fxLayoutAlign="end none" fxFlex>
-             <img *ngIf="!isNew" src="{{imageSrc}}" height="150px"/>
+             <img *ngIf="!isNew" src="{{imageSrc}}" (load)="imageLoaded()" height="150px"/>
              <lib-upload (fileUrl)="fileUrlHandler($event)" (imageAdded)="imageAddedHandler($event)" [runUpload]="runUpload" *ngIf="isNew" ></lib-upload>
           </div>
         </div>

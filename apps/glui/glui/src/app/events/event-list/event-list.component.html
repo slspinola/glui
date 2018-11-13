@@ -21,7 +21,7 @@
 
         <ng-container matColumnDef="eventDate">
           <th mat-header-cell *matHeaderCellDef> Data da Ocorrêcia </th>
-          <td mat-cell *matCellDef="let event"> {{event.eventDate | date : 'dd/MM/yyyy h.mma'}} </td>
+          <td mat-cell *matCellDef="let event"> {{event.eventDate | date : 'dd/MM/yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="description">

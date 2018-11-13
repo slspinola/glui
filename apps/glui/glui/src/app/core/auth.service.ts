@@ -14,6 +14,7 @@ import { ErrorCodes } from './error.model';
 export class AuthService {
 
   user: Observable<User>;
+  useruid: string;
  //fbUser: firebase.User;
   isAuthenticated: BehaviorSubject<boolean>;
 
@@ -26,6 +27,7 @@ export class AuthService {
           const u = this.afs.doc<User>(`users/${user.uid}`).valueChanges();
           //console.log('################')
           //console.log(u);
+          this.useruid = user.uid;
           return u;
         } else {
           this.isAuthenticated.next(false);
@@ -41,8 +43,11 @@ export class AuthService {
 
   getUser(): Promise<User> {
     return this.user.pipe(first()).toPromise();
-
     // const {uid} = await this.authService.getUser();
+  }
+
+  getUserUid(): string {
+    return this.useruid;
   }
 
   updateIsAuthenticated(show: boolean): void {
