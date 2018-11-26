@@ -2,7 +2,7 @@
 import { Component, OnInit, NgZone, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Event, EventState } from '../event.model';
+import { Event, EventState, EventType } from '../event.model';
 import { EventService } from '../event.service';
 import { ActivatedRoute } from '@angular/router';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -46,6 +46,7 @@ export class EventComponent implements OnInit, OnDestroy {
   isNew = true;
   spinnerOn = false;
   eventState = EventState;
+  eventType = EventType;
   imageSrc = '/assets/images/image.jpg';
   hasImage = false;
   showImageSpinner = false;
@@ -83,8 +84,9 @@ export class EventComponent implements OnInit, OnDestroy {
       description: '',
       location: new firestore.GeoPoint(38.5490182, -7.91107599),
       eventDate: Date.now(),
-      imageUrl: '',
+      imageUrl: '/assets/images/image.jpg',
       state: '',
+      type: '',
       createdAt: moment().valueOf(),
       active: true
     };
@@ -95,7 +97,12 @@ export class EventComponent implements OnInit, OnDestroy {
       this.eventService.getEvent(id).subscribe(_event => {
         this.event = _event;
         console.log(this.event);
-        this.imageSrc = this.event.imageUrl;
+        this.imageSrc = this.event.imageUrl? this.event.imageUrl: '/assets/images/image.jpg';
+        this.map.lat = this.event.location.latitude;
+        this.map.lng = this.event.location.longitude;
+        this.map.zoom = 20;
+        this.marker.lat = this.event.location.latitude;
+        this.marker.lng = this.event.location.longitude;
         this.setEventForm();
         
       });
@@ -126,6 +133,7 @@ export class EventComponent implements OnInit, OnDestroy {
     this.eventForm = this.formBuilder.group({
       description: [this.event.description, Validators.required],
       state: [this.event.state, Validators.required],
+      type: [this.event.type, Validators.required],
       latitude: [this.event.location.latitude, Validators.required],
       longitude: [this.event.location.longitude, Validators.required],
       eventDate: [date, Validators.required],
@@ -143,13 +151,10 @@ export class EventComponent implements OnInit, OnDestroy {
     }
   }
 
-  _submit(): void {
-    this.runUpload.next('testing run upload')
-  }
-
   parseEvent(): void {
     this.event.description = this.eventForm.value.description;
     this.event.state = this.eventForm.value.state;
+    this.event.type = this.eventForm.value.type;
 
     this.event.eventDate = moment(this.eventForm.value.eventDate).valueOf();
     const lat: number = parseFloat(this.eventForm.value.latitude);
@@ -245,7 +250,7 @@ export class EventComponent implements OnInit, OnDestroy {
       });
     });
 
-    if (navigator.geolocation) {
+    if (navigator.geolocation && this.isNew) {
       navigator.geolocation.getCurrentPosition(position => {
         this.marker.lat = position.coords.latitude;
         this.marker.lng = position.coords.longitude;

@@ -5,29 +5,41 @@ import { of } from 'rxjs';
 import { Event } from './event.model';
 import { firestore } from 'firebase';
 
-const input: Event[] = [
+const input: any[] = [
   {
+    id: 'zzzzzzzzzzzzzz',
     uid: 'testuid',
-    user_uid: 'useruid',
+    user_uid: 'useruid_zz',
     service_uid: 'serviceuid',
-    description: 'description',
+    description: 'serviceComponent',
     location: new firestore.GeoPoint(38.5490182, -7.91107599),
-    eventDate: Date.now(),
+    eventDate: 1543233469,
     imageUrl: 'http://www.pde.uk.com/uploads/images/660-plastic-bin-cutout.jpg',
     state: 'novo',
-    createdAt: Date.now(),
-    active: true
+    type: 'limpeza',
+    createdAt: 1543233469,
+    active: true,
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'sssssssssssss'
+      },
+    }
   },
   {
-    uid: 'testuid',
+    id: 'ssssssssssssss',
+    uid: 'testuid_ss',
     user_uid: 'useruid',
     service_uid: 'serviceuid',
-    description: 'description',
+    description: 'serviceComponent',
     location: new firestore.GeoPoint(38.5490182, -7.91107599),
-    eventDate: Date.now(),
+    eventDate: 1543233469,
     imageUrl: 'http://www.pde.uk.com/uploads/images/660-plastic-bin-cutout.jpg',
     state: 'novo',
-    createdAt: Date.now(),
+    type: 'limpeza',
+    createdAt: 1543233469,
     active: true
   }
 ];
@@ -44,15 +56,19 @@ const AngularFiresotreStub = {
 };
 
 describe('EventService', () => {
-  beforeEach(() =>
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         EventService,
         { provide: AngularFirestore, useValue: AngularFiresotreStub }
       ]
-    }));
+    });
 
-  it('should be created', () => {
+    
+  });
+
+  it('should be created', () => {   
     const service: EventService = TestBed.get(EventService);
     expect(service).toBeTruthy();
   });

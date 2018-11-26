@@ -9,38 +9,59 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
 import { of } from 'rxjs';
 
-const input: Event[] = [
+const input: any[] = [
   {
+    id: 'sssssssssssss',
     uid: 'testuid',
     user_uid: 'useruid',
     service_uid: 'serviceuid',
-    description: 'description',
+    description: 'eventListComponent',
     location: new firestore.GeoPoint(38.5490182, -7.91107599),
-    eventDate: Date.now(),
+    eventDate: 1543233469,
     imageUrl: 'http://www.pde.uk.com/uploads/images/660-plastic-bin-cutout.jpg',
     state: 'novo',
-    createdAt: Date.now(),
-    active: true
+    type:'recolha',
+    createdAt: 1543233469,
+    active: true,
+    payload: {
+      doc: {
+        data() {
+          return input[0];
+        },
+        id: 'sssssssssssss'
+      },
+    }
   },
   {
+    id: 'zzzzzzzzzzzzz',
     uid: 'testuid',
     user_uid: 'useruid',
     service_uid: 'serviceuid',
-    description: 'description',
+    description: 'eventListComponent',
     location: new firestore.GeoPoint(38.5490182, -7.91107599),
-    eventDate: Date.now(),
+    eventDate: 1543233469,
     imageUrl: 'http://www.pde.uk.com/uploads/images/660-plastic-bin-cutout.jpg',
     state: 'novo',
-    createdAt: Date.now(),
-    active: true
+    type: 'Limpeza',
+    createdAt: 1543233469,
+    active: true,
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'zzzzzzzzzzzzz'
+      },
+    }
   }
 ];
 
 const data = of(input);
 
+
 const collectionStub = {
   snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data),
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data),
 };
 
 const AngularFiresotreStub = {
@@ -74,7 +95,7 @@ describe('EventListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', () => {   
     expect(component).toBeTruthy();
   });
 });

@@ -18,7 +18,8 @@ import { MatToolbarModule,
          MatNativeDateModule,
          MatDatepickerModule,
          MatSelectModule,
-         MatOptionModule
+         MatOptionModule,
+         MatDialogModule
         } from '@angular/material';
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MatToolbarModule,
     MatDatepickerModule,
     MatMomentDateModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatDialogModule
   ],
   exports: [
     FlexLayoutModule, 
@@ -63,7 +65,8 @@ import { MatToolbarModule,
     MatDatepickerModule,
     MatMomentDateModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatDialogModule
   ]
 })
 export class MaterialLibModule {}

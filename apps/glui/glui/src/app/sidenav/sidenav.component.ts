@@ -15,9 +15,9 @@ export class SidenavComponent implements OnInit {
   menuItems = [
     {title: 'Dashboard', icon:'dashboard', routerLink:'/dashboard'},
     {title: 'Colaboradores', icon:'supervised_user_circle', routerLink:'/profiles'},
-    {title: 'Serviços', icon:'ballot', routerLink:'/service'},
+    {title: 'Serviços', icon:'ballot', routerLink:'/services'},
     {title: 'Ocorrências', icon:'style', routerLink:'/events'},
-    {title: 'Agendamentos', icon:'event', routerLink:'.'},
+    //{title: 'Agendamentos', icon:'event', routerLink:'.'},
   ];
 
   constructor(private authServ: AuthService) { 

@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
   filteredJobs: Observable<string[]>;
-  //jobs: string[] = [];
   allJobs: string[] = ['Motorista', 'Varredor', 'Limpeza', 'Cantoneiro', 'Aspirador'];
 
   @ViewChild('jobInput') jobInput: ElementRef<HTMLInputElement>;
@@ -166,9 +165,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (input) {
         input.value = '';
       }
-
-      //this.profileForm.get('jobs').setValue(null);
-
     }
   }
 

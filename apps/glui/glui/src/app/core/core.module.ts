@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AgmCoreModule } from '@agm/core';
 import { UploadFileModule } from '@glui/upload-file';
-
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { UploadFileModule } from '@glui/upload-file';
       apiKey: 'AIzaSyA9B5lKRV1rYLROsZamGMRDpwZ_VPXlNA4',
       libraries: ["places"]
     }),
-    UploadFileModule
+    UploadFileModule,
+    Ng2GoogleChartsModule
   ],
   exports: [
     RoutingModule,
@@ -31,7 +32,8 @@ import { UploadFileModule } from '@glui/upload-file';
     AngularFirestoreModule,
     AngularFireModule,
     AgmCoreModule,
-    UploadFileModule
+    UploadFileModule,
+    Ng2GoogleChartsModule
   ],
   declarations: [
   ],

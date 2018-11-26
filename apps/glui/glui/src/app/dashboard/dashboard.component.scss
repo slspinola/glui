@@ -1,7 +1,7 @@
 .container {
   mat-card {
-    height: 95%;
-    width: 95%;
+    height: 98%;
+    width: 98%;
     .toolbar {
       border-bottom: 2px solid #8fc62a;
       padding: 0 10px 10px 0;
@@ -19,6 +19,10 @@
 
     mat-card-content {
       padding: 10px 10px 0 0;
+
+      .chart-row {
+        width: 100%;
+      }
     }
   }
 

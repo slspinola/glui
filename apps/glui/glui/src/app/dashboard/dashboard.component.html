@@ -1,5 +1,5 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
-    <mat-card>
+    <mat-card fxLayout="column">
       <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
         <div  class="title" fxFlex fxFlexAlign="start">
             <span>Dashboard</span>
@@ -10,10 +10,27 @@
             </button>
         </div>
       </div>
-      <mat-card-content>
-        <img src="assets/images/chart.jpg" alt="" srcset="">
+      <mat-card-content  fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+        <!--<img src="assets/images/chart.jpg" alt="" srcset="">-->
+
+          <div class="chart-row" fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
+            <div>
+              <google-chart [data]="pieChartDataSevicesState"></google-chart>
+
+            </div>
+            <div>
+              <google-chart [data]="pieChartDataSevicesType"></google-chart>
+            </div>
+          </div>
+          <div class="chart-row" fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
+            <div>
+              <google-chart [data]="pieChartDataEventState"></google-chart>
+            </div>
+            <div>
+              <google-chart [data]="pieChartDataEventType"></google-chart>
+            </div>
+          </div>
+
       </mat-card-content>
-
-
     </mat-card>
   </div>

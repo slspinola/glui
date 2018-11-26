@@ -1,0 +1,35 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
+  <div class="header" fxFlexFill>
+      <h1 mat-dialog-title>Adicione Ocorrências</h1>
+  </div>
+
+<div class="content" mat-dialog-content fxFlexFill>
+  <p>Escolha as ocorrências que deseja adicionar</p>
+  <mat-selection-list #events  (selectionChange)="onSelection(events.selectedOptions.selected)">
+      <mat-list>
+        <div class="table-titles" fxLayout="row" fxLayoutAlign="space-around center" fxFlex>
+              <div fxFlex="33">Estado</div>
+              <div fxFlex="33">Tipo</div> 
+              <div fxFlex="33">Descrição</div>
+            </div>
+      </mat-list>
+      <mat-divider></mat-divider>
+      <mat-list-option *ngFor="let event of eventList$ | async" [value]="event.id">
+          <div class="table-info" fxLayout="row" fxLayoutAlign="space-around center">
+              <div fxFlex="33"> {{event.state}}</div>
+              <div fxFlex="33">{{event.type}}</div> 
+              <div fxFlex="33">{{event.description}}</div>
+            </div>
+        <mat-divider></mat-divider>
+      </mat-list-option>
+    </mat-selection-list>
+    
+    <p>
+      Ocorrências Selecionadas: {{events.selectedOptions.selected.length}}
+    </p>
+</div>
+<div  fxLayout="row" fxLayoutAlign="end center" mat-dialog-actions fxFlexFill>
+  <button mat-raised-button color="warn" mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="accent" mat-button (click)="addEvents(events.selectedOptions.selected)" cdkFocusInitial>Adicionar</button>
+</div>
+</div>

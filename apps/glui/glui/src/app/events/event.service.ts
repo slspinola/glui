@@ -22,9 +22,7 @@ export class EventService {
   }
 
   getEventList(): Observable<Event[]> {
-    const eventList: Observable<
-      Event[]
-    > = this.eventsCollection.snapshotChanges().pipe(
+    const eventList: Observable<Event[]> = this.eventsCollection.snapshotChanges().pipe(
       map(actions =>
         actions.map(a => {
           const data = a.payload.doc.data() as Event;
@@ -36,6 +34,25 @@ export class EventService {
     return eventList;
   }
 
+  getEventListDialog(): Observable<Event[]> {
+    const eventsCollection = this.db.collection<Event>('events', ref => 
+    ref.where('state', '>=', 'Novo')
+       .where('state', '<=', 'Pendente')
+  );
+
+    const eventList: Observable<Event[]> = eventsCollection.snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as Event;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
+    return eventList;
+  }
+
+  
   getEvent(eventId: string): Observable<Event> {
     this.eventDocument = this.db.doc<Event>(`events/${eventId}`);
     return this.eventDocument.valueChanges();
@@ -64,6 +81,19 @@ export class EventService {
         .catch(err => {
           return err;
         })
+    );
+  }
+
+  updateEventService(eventId: string, serviceId: string, state: string): Observable<Event> {
+    return from(
+      this.eventsCollection.doc(eventId)
+      .update({service_uid: serviceId, state: state})
+      .then(_event => {
+        return _event;
+      })
+      .catch(err => {
+        return err;
+      })
     );
   }
 

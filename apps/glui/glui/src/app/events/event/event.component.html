@@ -41,6 +41,12 @@
                   <mat-option *ngFor="let state of eventState"  [value]="state.state">{{state.state}}</mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-form-field appearance="outline"> 
+                <mat-label>Tipo</mat-label>
+                <mat-select MatInput formControlName="type" (selectionChange)="onChangeSelect($event)" placeholder="Tipo" required>
+                  <mat-option *ngFor="let type of eventType"  [value]="type.type">{{type.type}}</mat-option>
+                </mat-select>
+              </mat-form-field>
           </div>
           <div class="image-section" fxLayoutAlign="end none" fxFlex>
              <img *ngIf="!isNew" src="{{imageSrc}}" (load)="imageLoaded()" height="150px"/>

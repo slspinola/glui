@@ -15,7 +15,7 @@
     </div>
     <mat-card-content>
       <mat-form-field class="filter-table" *ngIf="_showFilter">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Descrição">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar por Descrição,Tipo,Estado..">
       </mat-form-field>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -24,9 +24,19 @@
           <td mat-cell *matCellDef="let event"> {{event.eventDate | date : 'dd/MM/yyyy'}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let event"> {{event.type}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef> Descrição </th>
           <td mat-cell *matCellDef="let event"> {{event.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> Estado </th>
+          <td mat-cell *matCellDef="let event"> {{event.state}} </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">

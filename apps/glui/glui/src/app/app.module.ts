@@ -18,6 +18,7 @@ import { ServiceListComponent } from './service/service-list/service-list.compon
 import { EventListComponent } from './events/event-list/event-list.component';
 import { EventService } from './events/event.service';
 import { EventComponent } from './events/event/event.component';
+import { EventDialogComponent } from './events/event-dialog/event-dialog.component';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { EventComponent } from './events/event/event.component';
     DashboardComponent, 
     ProfileListComponent, ProfileComponent, 
     ServiceComponent, ServiceListComponent, 
-    EventListComponent, EventComponent, 
+    EventListComponent, EventComponent, EventDialogComponent, 
   ],
   imports: [
     BrowserModule,
@@ -39,6 +40,7 @@ import { EventComponent } from './events/event/event.component';
     BrowserAnimationsModule,
     CoreModule
   ],
+  entryComponents: [EventDialogComponent],
   providers: [ProfileService, EventService],
   bootstrap: [AppComponent]
 })

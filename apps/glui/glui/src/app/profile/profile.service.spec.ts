@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { of } from 'rxjs';
 import { Profile } from './profile.model';
 
-const input: Profile[] = [
+const input: any[] = [
   { 
     id: 'qqqqqq',
     user_uid: 'abc123',
@@ -12,7 +12,15 @@ const input: Profile[] = [
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   },
   { 
     id: 'qqqqqq',
@@ -21,7 +29,15 @@ const input: Profile[] = [
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   }
 ];
 
@@ -45,8 +61,9 @@ describe('ProfileService', () => {
       ]
     }));
 
-  it('should be created', () => {
+  it('should be created sergio spinola', () => {
     const service: ProfileService = TestBed.get(ProfileService);
+    spyOn(service, 'getProfiles').and.returnValue(of(input));
     expect(service).toBeTruthy();
   });
 });

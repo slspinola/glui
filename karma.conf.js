@@ -29,6 +29,12 @@ module.exports = () => {
     logLevel: constants.LOG_INFO,
     autoWatch: false,
     browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--remote-debugging-port=9222']
+      }
+    },
     singleRun: true
   };
 };

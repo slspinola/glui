@@ -1,18 +1,124 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
-    <mat-card>
-      <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
-        <div  class="title" fxFlex fxFlexAlign="start">
-            <span>Serviços</span>
-        </div>
-        <div fxFlex fxLayoutAlign="end">
-            <button mat-icon-button >
-                <mat-icon class="icon" aria-label="Editar">edit</mat-icon>
-            </button>
-        </div>
+
+  <mat-card>
+    <div class="overlay" *ngIf="spinnerOn" fxLayoutAlign="center center">
+      <mat-spinner color="accent"></mat-spinner>
+    </div>
+    <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
+      <div class="title" fxFlex fxFlexAlign="start">
+        <span>Serviços</span>
       </div>
+      <div fxFlex fxLayoutAlign="end">
+        <button (click)="submit()" class="save" mat-icon-button>
+          <mat-icon class="icon" aria-label="Editar">save</mat-icon>
+        </button>
+        <button class="cancel" mat-icon-button (click)="cancel()">
+          <mat-icon class="icon" aria-label="Editar">clear</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-card-content>
+        <div fxLayout="column" class="form-group" fxFlex>
+      <form [formGroup]="serviceForm" >
+        <div fxLayout="column" class="form-group" fxFlex>
+          <div fxLayout="row">
+            <mat-form-field appearance="outline" class="date-input" color="primary">
+              <mat-label>Data do Serviço</mat-label>
+              <input matInput [matDatepicker]="picker" placeholder="Escolha uma data" formControlName="serviceDate"
+                class="form-control" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-hint>
+                <div *ngIf="f.serviceDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.serviceDate.errors.required">Data é obrigatório</div>
+                </div>
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field class="state-field" appearance="outline">
+              <mat-label>Estado</mat-label>
+              <mat-select MatInput formControlName="state" (selectionChange)="onChangeSelect($event)" placeholder="Estado"
+                required>
+                <mat-option *ngFor="let state of serviceState" [value]="state.state">{{state.state}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center start">
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo</mat-label>
+              <mat-select MatInput formControlName="type" (selectionChange)="onChangeSelect($event)" placeholder="Tipo"
+                required>
+                <mat-option *ngFor="let type of serviceType" [value]="type.type">{{type.type}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Trabalhador</mat-label>
+              <mat-select MatInput formControlName="workerControl" [compareWith]="compareFn" (selectionChange)="onChangeSelect($event)" placeholder="Trabalhador"
+                required>
+                <mat-option *ngFor="let worker of workerList" [value]="worker">{{worker.name}} {{worker.lastname}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="column">
+            <mat-form-field class="description-input" appearance="outline" color="primary">
+              <mat-label>Descrição</mat-label>
+              <input matInput placeholder="Descrição" type="text" formControlName="description" class="form-control"
+                [ngClass]="{ 'is-invalid': f.description.errors }" required />
+              <mat-hint>
+                <div *ngIf="f.description.errors" class="invalid-feedback">
+                  <div *ngIf="f.description.errors.required">Descrição é obrigatório</div>
+                </div>
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field class="description-input" appearance="outline" color="primary">
+              <mat-label>Observação Técnica</mat-label>
+              <input matInput placeholder="Observação" type="text" formControlName="observation" class="form-control" />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
       
-      
-  
-    </mat-card>
-  </div>
-  
+      <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
+            <div class="subtitle" fxFlex fxFlexAlign="start">
+              <span>Ocorrências a tratar</span>
+            </div>
+            <div fxFlex fxLayoutAlign="end">
+              <button [disabled]="isNew" (click)="openDialog()" class="save" mat-icon-button>
+                <mat-icon class="icon" aria-label="Editar">add</mat-icon>
+              </button>
+              <button [disabled]="isNew" class="cancel" mat-icon-button (click)="removeEvents()">
+                <mat-icon class="icon" aria-label="Editar">delete_forever</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="message" fxLayout="row" *ngIf="isNew">
+                Grave o serviço para em seguida adicionar as ocorrências que deseja associar a este serviço.
+            </div>
+            <mat-selection-list *ngIf="!isNew" #events  (selectionChange)="onSelection(events.selectedOptions.selected)">
+              <mat-list>
+                <div class="table-titles" fxLayout="row" fxLayoutAlign="space-around center">
+                      <div fxFlex="25">Estado</div>
+                      <div fxFlex="25">Tipo</div> 
+                      <div fxFlex="25">Descrição</div>
+                      <div fxFlex="25">Data da ocorrência</div>
+                    </div>
+              </mat-list>
+              
+              <mat-list-option *ngFor="let event of eventList" [value]="event.id">
+                  <div class="table-info" fxLayout="row" fxLayoutAlign="space-around center">
+                      <div fxFlex="25"> {{event.state}}</div>
+                      <div fxFlex="25">{{event.type}}</div> 
+                      <div fxFlex="30">{{event.description}}</div>
+                      <div fxFlex="20">{{event.eventDate | date : 'dd/MM/yyyy'}}</div>
+                    </div>
+                <mat-divider></mat-divider>
+              </mat-list-option>
+            </mat-selection-list>
+        </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

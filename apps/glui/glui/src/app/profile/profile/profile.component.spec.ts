@@ -10,24 +10,40 @@ import { ProfileService } from '../profile.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 
-const input: Profile[] = [
+const input: any[] = [
   { 
-    id: 'id',
-    user_uid: 'useruid',
+    id: 'qqqqqq',
+    user_uid: 'abc123',
     name: 'name', 
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   },
   { 
-    id: 'id',
-    user_uid: 'useruid',
+    id: 'qqqqqq',
+    user_uid: 'abc123',
     name: 'name', 
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   }
 ];
 
@@ -35,11 +51,13 @@ const data = of(input);
 
 const collectionStub = {
   snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data),
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data),
+  
 }
 
 const AngularFiresotreStub = {
-  collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
+  collection: jasmine.createSpy('collection').and.returnValue(collectionStub),
+  doc: jasmine.createSpy('doc').and.returnValue(data)
 }
 
 

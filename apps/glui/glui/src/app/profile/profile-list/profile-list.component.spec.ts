@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 import { Profile } from '../profile.model';
 
 
-const input: Profile[] = [
+const input: any[] = [
   { 
     id: 'qqqqqq',
     user_uid: 'abc123',
@@ -16,7 +16,15 @@ const input: Profile[] = [
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   },
   { 
     id: 'qqqqqq',
@@ -25,15 +33,25 @@ const input: Profile[] = [
     lastname: 'lastname', 
     active: true,
     jobs: ['worker','worker'],
-    email: 'slss@slss.pt'
+    email: 'slss@slss.pt',
+    payload: {
+      doc: {
+        data() {
+          return input[1];
+        },
+        id: 'qqqqqq'
+      },
+    }
   }
 ];
 
 const data = of(input);
+const dataSingle = of(input[0]);
 
 const collectionStub = {
   snapshotChanges: jasmine.createSpy('snapshotChanges').and.returnValue(data),
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data),
+  doc: jasmine.createSpy('doc').and.returnValue(dataSingle)
 }
 
 const AngularFiresotreStub = {

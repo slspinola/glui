@@ -2,6 +2,20 @@
   mat-card {
     height: 95%;
     width: 95%;
+
+    .overlay {
+      position: fixed; /* Sit on top of the page content */
+      width: 100%; /* Full width (cover the whole page) */
+      height: 100%; /* Full height (cover the whole page) */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+      z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+      cursor: pointer; /* Add a pointer on hover */
+    }
+
     .toolbar {
       border-bottom: 2px solid #8fc62a;
       padding: 0 10px 10px 0;
@@ -11,11 +25,48 @@
         font-size: 20px;
         padding-top: 10px;
       }
-      button:hover {
+
+      .subtitle{
+        font-weight: bold;
+        color: rgb(59, 59, 59);
+        font-size: 16px;
+        padding-top: 16px;
+      }
+
+      .save:hover {
         background-color: #8fc62a;
         color: white;
       }
+      .cancel:hover {
+        background-color: #c62a2a;
+        color: white;
+      }
+    }
+
+    mat-card-content {
+      padding: 15px 10px 0 10px;
+      height: 95%;
+
+      .description-input {
+        width: 100%;
+      }
+
+      .state-field {
+        padding-left: 30px;
+      }
+
+      .message {
+        color: gray;
+        font-size: 12 px;
+        padding-top: 20px;
+      }
+      .table-titles {
+        font-weight: bold;
+        font-size: 17px;
+        padding: 0 0 5px 15px;
+        border-bottom: 1px solid gray;
+        
+      }
     }
   }
-
 }

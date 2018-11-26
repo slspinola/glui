@@ -1,4 +1,5 @@
 export interface Event {
+  id?: string;
   uid: string;
   user_uid?: string;
   service_uid?: string;
@@ -7,6 +8,7 @@ export interface Event {
   eventDate: number;
   imageUrl?: string;
   state: string;
+  type: string;
   createdAt: number;
   active: boolean;
 }
@@ -21,4 +23,11 @@ export const EventState = [
   { state: 'Pendente' },
   { state: 'Agendado' },
   { state: 'Tratado' }
+];
+
+export const EventType = [
+  { type: 'Recolha' },
+  { type: 'Limpeza' },
+  { type: 'Manutenção' },
+  { type: 'Outro' }
 ];

@@ -11,7 +11,7 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class EventListComponent implements OnInit {
 
-  displayedColumns: string[] = ['eventDate', 'description', 'edit', 'delete'];
+  displayedColumns: string[] = ['eventDate', 'type', 'description', 'state', 'edit', 'delete'];
   dataSource: MatTableDataSource<Event>;
 
   eventList: Observable<Event[]>
@@ -22,7 +22,6 @@ export class EventListComponent implements OnInit {
   ngOnInit() {
     this.eventService.getEventList().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      console.log(data);
     });
   }
 
@@ -34,7 +33,7 @@ export class EventListComponent implements OnInit {
     this._showFilter = !this._showFilter;
   }
 
-  deleteProfile(eventId: string): void{
+  deleteEvent(eventId: string): void{
     this.eventService.deleteEvent(eventId);
   }
 

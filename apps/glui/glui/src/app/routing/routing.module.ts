@@ -6,9 +6,11 @@ import { HomeComponent } from '../home/home.component';
 import { ProfileComponent } from '../profile/profile/profile.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { ServiceComponent } from '../service/service/service.component';
+import { ServiceListComponent } from '../service/service-list/service-list.component';
 import { ProfileListComponent } from '../profile/profile-list/profile-list.component';
 import { EventListComponent } from '../events/event-list/event-list.component';
 import { EventComponent } from '../events/event/event.component';
+
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'event', component: EventComponent, canActivate: [AuthGuard]},
   { path: 'event/:id', component: EventComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'services', component: ServiceListComponent, canActivate: [AuthGuard]},
   { path: 'service', component: ServiceComponent, canActivate: [AuthGuard]},
+  { path: 'service/:id', component: ServiceComponent, canActivate: [AuthGuard]},
 
 ];
 

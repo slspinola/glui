@@ -61,7 +61,7 @@ export class AuthService {
         let userExists = false;
         if(fbUser !== undefined && fbUser!== null){
           this.updateIsAuthenticated(true);
-          this.router.navigate(['/glui']);
+          this.router.navigate(['/dashboard']);
           this.updateUserData(fbUser.user);
           userExists = true;
         }
