@@ -50,4 +50,17 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('form sould be invalid', () =>{
+    component.loginForm.controls['email'].setValue('');
+    component.loginForm.controls['password'].setValue('');
+    expect(component.loginForm.valid).toBeFalsy();
+  })
+
+  it('form sould be invalid', () =>{
+    component.loginForm.controls['email'].setValue('glui@glui.com');
+    component.loginForm.controls['password'].setValue('password');
+    expect(component.loginForm.valid).toBeTruthy();
+  })
+
 });

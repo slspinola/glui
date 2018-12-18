@@ -1,5 +1,6 @@
 .container {
   mat-card {
+    overflow: auto;
     height: 95%;
     width: 95%;
     .toolbar {
