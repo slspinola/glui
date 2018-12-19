@@ -46,12 +46,12 @@ export class MapComponent implements OnInit {
   }
 
   markerIconUrl(state: string): string {
-    const iconUrl = "/assets/images/pins/"+state+".png";
+    const iconUrl = "/assets/images/pins/" + state + ".png";
     return iconUrl;
   }
 
   markerClicked(eventId): void {
-    
+
     const url = `${window.location.origin}/event/${eventId}`;
     console.log(url);
     window.open(url, '_blank');

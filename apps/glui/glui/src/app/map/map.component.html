@@ -1,39 +1,32 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlexFill>
-    <mat-card fxLayout="column">
-      <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
-        <div  class="title" fxFlex fxFlexAlign="start">
-            <span>Mapa</span>
-        </div>
-        <div fxFlex fxLayoutAlign="end">
-            <button mat-icon-button >
-                <mat-icon class="icon" aria-label="Editar">place</mat-icon>
-            </button>
-        </div>
+  <mat-card fxLayout="column">
+    <div class="toolbar" fxLayout="row" fxLayoutGap="gappx">
+      <div class="title" fxFlex fxFlexAlign="start">
+        <span>Mapa</span>
       </div>
-      <mat-card-content  fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
-          <div class="map-section" fxLayout="column" fxFlex>
-              <mat-form-field class="form-group" color="accent" [style.fontSize.px]="16">
-                  <input matInput placeholder="Pesquise por uma rua.." 
-                        autocorrect="off" autocapitalize="off" 
-                        spellcheck="off" type="text" 
-                        class="form-control" #search [formControl]="searchControl">
-                        <mat-hint [style.fontSize.px]="10">
-                            Pesquise o local e em seguida faça duplo clique sobre o mapa no ponto que deseja registar.
-                          </mat-hint>
-              </mat-form-field>
-              <agm-map (mapDblClick)="mapDblClick($event)" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom" fxFlex>     
-                <agm-marker [markerDraggable]="marker.drag" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
-                <agm-marker 
-                  (markerClick) = "markerClicked(event.id)"
-                  *ngFor="let event of eventList" 
-                  [latitude]="event.location.latitude" 
-                  [longitude]="event.location.longitude"
-                  [iconUrl]= markerIconUrl(event.state)>
-                </agm-marker>
-                </agm-map>
-          </div>
-
-          
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <div fxFlex fxLayoutAlign="end">
+        <button mat-icon-button>
+          <mat-icon class="icon" aria-label="Editar">place</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+      <div class="map-section" fxLayout="column" fxFlex>
+        <mat-form-field class="form-group" color="accent" [style.fontSize.px]="16">
+          <input matInput placeholder="Pesquise por uma rua.." autocorrect="off" autocapitalize="off" spellcheck="off"
+            type="text" class="form-control" #search [formControl]="searchControl">
+          <mat-hint [style.fontSize.px]="10">
+            Pesquise o local e em seguida faça duplo clique sobre o mapa no ponto que deseja registar.
+          </mat-hint>
+        </mat-form-field>
+        <agm-map (mapDblClick)="mapDblClick($event)" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom"
+          fxFlex>
+          <agm-marker [markerDraggable]="marker.drag" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+          <agm-marker (markerClick)="markerClicked(event.id)" *ngFor="let event of eventList" [latitude]="event.location.latitude"
+            [longitude]="event.location.longitude" [iconUrl]=markerIconUrl(event.state)>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
