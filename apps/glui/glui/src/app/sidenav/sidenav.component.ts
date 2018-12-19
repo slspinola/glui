@@ -13,10 +13,14 @@ export class SidenavComponent implements OnInit {
   showMenu$: Observable<boolean>;
 
   menuItems = [
-    {title: 'Dashboard', icon:'dashboard', routerLink:'/dashboard'},
+    {title: 'Dashboard', icon:'pie_chart', routerLink:'/dashboard'},
     {title: 'Colaboradores', icon:'supervised_user_circle', routerLink:'/profiles'},
     {title: 'Serviços', icon:'ballot', routerLink:'/services'},
     {title: 'Ocorrências', icon:'style', routerLink:'/events'},
+    {title: 'Mapa', icon:'place', routerLink:'/map'},
+    {title: 'Minha Conta', icon:'person', routerLink:'/map'},
+    {title: 'Configurações', icon:'build', routerLink:'/map'},
+
     //{title: 'Agendamentos', icon:'event', routerLink:'.'},
   ];
 

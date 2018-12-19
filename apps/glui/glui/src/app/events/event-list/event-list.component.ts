@@ -11,7 +11,7 @@ import {MatTableDataSource} from '@angular/material';
 })
 export class EventListComponent implements OnInit {
 
-  displayedColumns: string[] = ['eventDate', 'type', 'description', 'state', 'edit', 'delete'];
+  displayedColumns: string[] = ['eventDate', 'type', 'description', 'state', 'service', 'edit', 'delete'];
   dataSource: MatTableDataSource<Event>;
 
   eventList: Observable<Event[]>

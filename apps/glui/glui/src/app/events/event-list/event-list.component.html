@@ -39,6 +39,19 @@
           <td mat-cell *matCellDef="let event"> {{event.state}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="service">
+          <th mat-header-cell *matHeaderCellDef> Serviço </th>
+          <td class="row-buton" mat-cell *matCellDef="let event">
+            <button mat-icon-button [disabled]="event.service_uid.length==0">
+              <mat-icon class="inactive" *ngIf="event.service_uid.length==0" aria-label="Sevice">ballot</mat-icon>
+              <a *ngIf="event.service_uid.length > 0" mat-icon-button target="_blank" routerLink="/service/{{event.service_uid}}">
+                <mat-icon  class="icon-service" aria-label="Sevice">ballot</mat-icon>
+              </a>
+            </button>
+            
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef> Editar </th>
           <td class="row-button" mat-cell *matCellDef="let event">

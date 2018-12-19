@@ -100,8 +100,9 @@
             <mat-selection-list *ngIf="!isNew" #events  (selectionChange)="onSelection(events.selectedOptions.selected)">
               <mat-list>
                 <div class="table-titles" fxLayout="row" fxLayoutAlign="space-around center">
-                      <div fxFlex="25">Estado</div>
-                      <div fxFlex="25">Tipo</div> 
+                      <div fxFlex="10"></div>
+                      <div fxFlex="20">Estado</div>
+                      <div fxFlex="20">Tipo</div> 
                       <div fxFlex="25">Descrição</div>
                       <div fxFlex="25">Data da ocorrência</div>
                     </div>
@@ -109,8 +110,17 @@
               
               <mat-list-option *ngFor="let event of eventList" [value]="event.id">
                   <div class="table-info" fxLayout="row" fxLayoutAlign="space-around center">
-                      <div fxFlex="25"> {{event.state}}</div>
-                      <div fxFlex="25">{{event.type}}</div> 
+                      <div fxFlex="10"> 
+                          <button class="btn-view-event" mat-icon-button>
+                              <a target="_blank" mat-icon-button routerLink="/event/{{event.id}}">
+                                <mat-icon class="icon" aria-label="Editar">remove_red_eye</mat-icon>
+                              </a>
+                            </button>
+                      </div>
+                      <div fxFlex="20"> 
+                        {{event.state}}
+                      </div>
+                      <div fxFlex="20">{{event.type}}</div> 
                       <div fxFlex="30">{{event.description}}</div>
                       <div fxFlex="20">{{event.eventDate | date : 'dd/MM/yyyy'}}</div>
                     </div>

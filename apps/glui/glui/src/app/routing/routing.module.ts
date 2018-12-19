@@ -10,6 +10,7 @@ import { ServiceListComponent } from '../service/service-list/service-list.compo
 import { ProfileListComponent } from '../profile/profile-list/profile-list.component';
 import { EventListComponent } from '../events/event-list/event-list.component';
 import { EventComponent } from '../events/event/event.component';
+import { MapComponent } from '../map/map.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'event', component: EventComponent, canActivate: [AuthGuard]},
   { path: 'event/:id', component: EventComponent, canActivate: [AuthGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'map', component: MapComponent, canActivate: [AuthGuard]},
   { path: 'services', component: ServiceListComponent, canActivate: [AuthGuard]},
   { path: 'service', component: ServiceComponent, canActivate: [AuthGuard]},
   { path: 'service/:id', component: ServiceComponent, canActivate: [AuthGuard]},
